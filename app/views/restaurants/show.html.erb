@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h1><%= @restaurant.name %></h1>
+    </div>
+    <div class="card-body">
+      <p><strong>Address:</strong> <%= @restaurant.address %></p>
+      <p><strong>Category:</strong> <%= @restaurant.category %></p>
+      <p><strong>Phone #:</strong> <%= @restaurant.phone_number %></p>
+    </div>
+  </div>
+
+  <h2 class="mt-4">Reviews</h2>
+  <ul class="list-group">
+    <% @restaurant.reviews.each do |review| %>
+      <li class="list-group-item">
+        <p><strong>Rating:</strong> <%= star_rating(review.rating) %></p>
+        <p><%= review.content %></p>
+      </li>
+    <% end %>
+  </ul>
+  <div class="mt-4">
+    <%= link_to 'Create Review', new_restaurant_review_path(@restaurant), class: 'btn btn-primary' %>
+  </div>
+</div>

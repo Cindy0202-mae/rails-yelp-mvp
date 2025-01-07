@@ -1,0 +1,23 @@
+<h1>Create a New Restaurant</h1>
+
+<%= simple_form_for @restaurant do |f| %>
+  <div class="form-group">
+    <%= f.input :name, label: 'Name', input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :address, label: 'Address', input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :phone_number, label: 'Phone Number', input_html: { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.input :category, collection: Restaurant::CATEGORIES, label: 'Category', input_html: { class: 'form-control' }, prompt: 'Select a category' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.button :submit, 'Create Restaurant', class: 'btn btn-primary' %>
+  </div>
+<% end %>
