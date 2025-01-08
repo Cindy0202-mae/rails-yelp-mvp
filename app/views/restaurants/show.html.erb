@@ -14,12 +14,21 @@
   <ul class="list-group">
     <% @restaurant.reviews.each do |review| %>
       <li class="list-group-item">
-        <p><strong>Rating:</strong> <%= star_rating(review.rating) %></p>
+        <p><strong>Rating:</strong> <%= review.rating.present? ? star_rating(review.rating) : 'No rating' %></p>
         <p><%= review.content %></p>
       </li>
     <% end %>
   </ul>
-  <div class="mt-4">
-    <%= link_to 'Create Review', new_restaurant_review_path(@restaurant), class: 'btn btn-primary' %>
-  </div>
+  <h3 class="mt-4">Add a Review</h3>
+    <%= simple_form_for [@restaurant, @restaurant.reviews.build] do |f| %>
+      <div class="form-group">
+        <%= f.input :content %>
+      </div>
+      <div class="form-group">
+        <%= f.input :rating, collection: 0..5, prompt: 'Select a rating' %>
+      </div>
+      <div class="form-group">
+        <%= f.submit :submit, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
 </div>
