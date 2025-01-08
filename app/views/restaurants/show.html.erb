@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <div class="card">
+  <div class="card mb-4">
     <div class="card-header">
       <h1><%= @restaurant.name %></h1>
     </div>
@@ -11,7 +11,7 @@
   </div>
 
   <h2 class="mt-4">Reviews</h2>
-  <ul class="list-group">
+  <ul class="list-group mb-4">
     <% @restaurant.reviews.each do |review| %>
       <li class="list-group-item">
         <p><strong>Rating:</strong> <%= review.rating.present? ? star_rating(review.rating) : 'No rating' %></p>
@@ -20,15 +20,19 @@
     <% end %>
   </ul>
   <h3 class="mt-4">Add a Review</h3>
-    <%= simple_form_for [@restaurant, @restaurant.reviews.build] do |f| %>
-      <div class="form-group">
-        <%= f.input :content %>
-      </div>
-      <div class="form-group">
-        <%= f.input :rating, collection: 0..5, prompt: 'Select a rating' %>
-      </div>
-      <div class="form-group">
-        <%= f.submit :submit, class: 'btn btn-primary' %>
-      </div>
-    <% end %>
+  <div class="card">
+    <div class="card-body">
+      <%= simple_form_for [@restaurant, @restaurant.reviews.build] do |f| %>
+        <div class="form-group">
+          <%= f.input :content, label: 'Content', input_html: { class: 'form-control' } %>
+        </div>
+        <div class="form-group">
+          <%= f.input :rating, collection: 0..5, label: 'Rating', input_html: { class: 'form-control' }, prompt: 'Select a rating' %>
+        </div>
+        <div class="form-group">
+          <%= f.button :submit, 'Submit Review', class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
